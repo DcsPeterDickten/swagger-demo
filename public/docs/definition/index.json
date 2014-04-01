@@ -1,0 +1,21 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000/docs/",
+  "apis": [
+      {
+          "path": "definition/sessions.{format}",
+          "description": "User session operations"
+      },
+
+      {
+          "path": "definition/products.{format}",
+          "description": "Data set operations"
+      },
+
+      {
+          "path": "definition/dev.{format}",
+          "description": "Development & testing operations"
+      }
+  ]
+}

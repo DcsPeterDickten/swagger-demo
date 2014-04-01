@@ -1,0 +1,43 @@
+{
+    "apiVersion": "1.0",
+    "swaggerVersion": "1.2",
+    "basePath": "localhost:3000/",
+    "apis": [
+        {
+            "path": "/dev/reset_db",
+            "operations": [
+                {
+                    "method": "patch",
+                    "nickname": "repop_db",
+                    "notes": "&bull; Close any rails consoles opened in sandbox mode (rails console --sandbox) before running this operation<br>&bull; Reload this page after running in order to refresh the authorization token<br>&bull; This task deletes data set cache files, drops and reinitializes the database, then runs any outstanding migrations",
+                    "summary": "Reset and reseed the database with test data",
+                    "parameters": [
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "form"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 202,
+                            "message": "Request successful (database repopulated)"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        },
+
+                        {
+                            "code": 500,
+                            "message": "Internal server error"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

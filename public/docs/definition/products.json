@@ -1,0 +1,358 @@
+{
+    "apiVersion": "1.0",
+    "swaggerVersion": "1.2",
+    "basePath": "localhost:3000",
+    "apis": [
+        {
+            "path": "/products",
+            "operations": [
+                {
+                    "method": "post",
+                    "nickname": "create",
+                    "summary": "Create a new product",
+                    "consumes" : [ "text/html", "text/csv" ],
+                    "parameters": [
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "form"
+                        },
+                        {
+                            "name": "name",
+                            "description": "Product name",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "form",
+                            "defaultValue": "New Product"
+                        },
+                        {
+                            "name": "datafile",
+                            "description": "Info file for product",
+                            "dataType": "file",
+                            "paramType": "body"
+                        },
+                        {
+                            "name": "options",
+                            "description": "Product options",
+                            "required": false,
+                            "dataType": "Product_Options",
+                            "paramType": "form"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Request successful"
+                        },
+
+                        {
+                            "code": 400,
+                            "message": "Invalid parameters"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "path": "/products",
+            "operations": [
+                {
+                    "method": "get",
+                    "nickname": "find_all",
+                    "summary": "Get all products",
+                    "parameters": [
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "query"
+                        },
+
+                        {
+                            "name": "order_by",
+                            "description": "Columns by which to sort",
+                            "dataType": "string",
+                            "paramType": "query",
+                            "defaultValue": "updated_at desc"
+                        },
+
+                        {
+                            "name": "state",
+                            "description": "Product state. Can be a comma delimited string list or array of states.",
+                            "dataType": "string, array",
+                            "paramType": "query"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Request successful"
+                        },
+
+                        {
+                            "code": 400,
+                            "message": "Invalid parameters"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "path": "/products/{id}",
+            "operations": [
+                {
+                    "method": "get",
+                    "nickname": "find_by_id",
+                    "summary": "Get product by id",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "Product ID",
+                            "required": true,
+                            "dataType": "integer",
+                            "paramType": "path",
+                            "defaultValue": 1
+                        },
+
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "query"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Request successful"
+                        },
+
+                        {
+                            "code": 400,
+                            "message": "Invalid product id or version"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        },
+
+                        {
+                            "code": 404,
+                            "message": "product not found"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "path": "/products/{id}/details",
+            "operations": [
+                {
+                    "method": "get",
+                    "nickname": "find_details_by_id",
+                    "summary": "Get the details for a product",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "product id",
+                            "required": true,
+                            "dataType": "integer",
+                            "paramType": "path",
+                            "defaultValue": 1
+                        },
+
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "query"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Request successful"
+                        },
+
+                        {
+                            "code": 400,
+                            "message": "Invalid product id"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        },
+
+                        {
+                            "code": 404,
+                            "message": "product not found"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "path": "/products/{id}",
+            "operations": [
+                {
+                    "method": "patch",
+                    "nickname": "update",
+                    "summary": "Update a product",
+                    "notes": "The options parameter accepts partial updates. To reset a key to its default, send NULL as the value within the JSON literal. To reset all options, send NULL value for the JSON literal.",
+                    "consumes": ["text/json", "text/csv", "text/xml"],
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "product id",
+                            "required": true,
+                            "dataType": "integer",
+                            "paramType": "path",
+                            "defaultValue": 1
+                        },
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "form"
+                        },
+                        {
+                            "name": "name",
+                            "description": "product name",
+                            "dataType": "string",
+                            "paramType": "form"
+                        },
+                        {
+                            "name": "state",
+                            "description": "Current state of the product",
+                            "dataType": "string",
+                            "paramType": "form"
+                        },
+                        {
+                            "name": "options",
+                            "description": "product options - must be valid JSON",
+                            "dataType": "Product_Options",
+                            "paramType": "body"
+                        },
+
+                        {
+                            "name": "version",
+                            "description": "Version of product details. The default is the current version.",
+                            "required": false,
+                            "dataType": "integer",
+                            "paramType": "form"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 202,
+                            "message": "Request successful (product updated)"
+                        },
+
+                        {
+                            "code": 400,
+                            "message": "Invalid parameters"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        },
+
+                        {
+                            "code": 404,
+                            "message": "product not found"
+                        }
+                    ]
+                }
+            ]
+        },
+
+        {
+            "path": "/products/{id}",
+            "operations": [
+                {
+                    "method": "delete",
+                    "nickname": "delete",
+                    "summary": "Delete the product (if present) for the product id sent",
+                    "parameters": [
+                        {
+                            "name": "id",
+                            "description": "product id",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "path",
+                            "defaultValue": 1
+                        },
+
+                        {
+                            "name": "token",
+                            "description": "Auth token",
+                            "required": true,
+                            "dataType": "string",
+                            "paramType": "form"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "Request successful (but product was not found)"
+                        },
+
+                        {
+                            "code": 202,
+                            "message": "Request successful (product deleted)"
+                        },
+
+                        {
+                            "code": 401,
+                            "message": "Invalid token"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+
+    "models": {
+        "Product_Options": {
+            "id": "Options: ",
+            "description": "Options for each product",
+            "required": ["textColumn", "metaColumns", "config"],
+            "properties": {
+                "textColumn": {
+                    "type": "string"
+                },
+
+                "metaColumns": {
+                    "type": "array"
+                },
+
+                "config": {
+                    "type": "hash"
+                }
+            }
+        }
+    }
+}
