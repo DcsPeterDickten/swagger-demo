@@ -4,11 +4,6 @@
   "basePath": "http://localhost:3000/docs/",
   "apis": [
       {
-          "path": "definition/sessions.{format}",
-          "description": "User session operations"
-      },
-
-      {
           "path": "definition/products.{format}",
           "description": "Data set operations"
       },
