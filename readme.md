@@ -3,14 +3,12 @@ Swagger UI Demo
 
 This repo includes the backend, links, and slides for Swagger UI presentation at the Ruby User Group meeting hosted at DCS-Fürth on April 2, 2014.
 
-===============
-
-#### <i class="icon-hdd"></i> Backend
+#### Backend
 
 The demo uses a rails backend. As a consumer of REST Apis, however, swagger is naturally backend-agnostic.
 
 
-#### <i class="icon-file"></i> Swagger Docs
+#### Swagger Docs
 
 The swagger documention is located under `public/docs` in this project. It is, however, very loosely coupled with the backend. Moving it to another project is very easy - simply update the links at the following locations:
 
