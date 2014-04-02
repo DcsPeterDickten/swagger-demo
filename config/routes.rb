@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # DISCLAIMER: Quick and dirty routes to to demonstrate Swagger-UI:
 
+  get 'docs', to: redirect('docs/')
+
   get 'sessions' => 'swagger#sessions'
   post 'sessions' => 'swagger#sessions'
   delete 'sessions/:token' => 'swagger#sessions', param: :token
